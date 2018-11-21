@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Ultimate Ears</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+<div class="slider js-slider">
+  <div class="slider__inner js-slider__inner"></div>
+  
+  <div class="slide js-slide">
+    <div class="slide__content">
+    </div>
+    <div class="slider__text js-slider__text">
+      <div class="slider__text-line js-slider__text-line"><div>EVERY PAIR OF ULTIMATE EARS</div></div>
+      <div class="slider__text-line js-slider__text-line"><div>IS TUNED AND SCULPTED TO GIVE YOU</div></div>
+      <div class="slider__text-line js-slider__text-line"><div>SUPERIOR AUDIO QUALITY</div></div>
+    </div>
+  </div>
+    
+  <div class="slide js-slide">
+    <div class="slide__content">
+    </div>
+      <div class="slider__text js-slider__text">
+        <div class="slider__text-line js-slider__text-line">
+          <div>MOLDED to your personal earprint</div>
+        </div>
+        <div class="slider__text-line js-slider__text-line">
+          <div>for incredible comfort, fit,</div>
+        </div>
+        <div class="slider__text-line js-slider__text-line">
+          <div>and isolation.</div>
+        </div>
+      </div>
+  </div>
+
+    <div class="slide js-slide">
+      <div class="slide__content">
+        
+      </div>
+      <div class="slider__text js-slider__text">
+        <div class="slider__text-line js-slider__text-line">
+          <div>BLOCK OUT THE NOISE</div>
+        </div>
+        <div class="slider__text-line js-slider__text-line">
+          <div>AND HEAR YOUR MUSIC THE WAY IT WAS INTENDED,</div>
+        </div>
+        <div class="slider__text-line js-slider__text-line">
+          <div>EVEN ON THE STREET</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide js-slide">
+      <div class="slide__content">
+        
+      </div>
+      <div class="slider__text js-slider__text">
+        <div class="slider__text-line js-slider__text-line">
+          <div>FOR OVER 20 YEARS</div>
+        </div>
+        <div class="slider__text-line js-slider__text-line">
+          <div>ULTIMATE EARS HAVE BEEN USED</div>
+        </div>
+        <div class="slider__text-line js-slider__text-line">
+          <div>BY THE WORLD’S TOP MUSICIANS</div>
+        </div>
+      </div>
+    </div>
+  
+  <nav class="slider__nav js-slider__nav">
+    <div class="slider-bullet js-slider-bullet">
+      <span class="slider-bullet__text js-slider-bullet__text">01. PREMIUM WIRELESS EARPHONES</span>
+      <span class="slider-bullet__line js-slider-bullet__line"></span>
+    </div>
+     <div class="slider-bullet js-slider-bullet">
+      <span class="slider-bullet__text js-slider-bullet__text">02. CUSTOM MOLDED TO YOUR EARS</span>
+      <span class="slider-bullet__line js-slider-bullet__line"></span>
+    </div>
+     <div class="slider-bullet js-slider-bullet">
+      <span class="slider-bullet__text js-slider-bullet__text">03. INDUSTRY LEADING SOUND ISOLATION</span>
+      <span class="slider-bullet__line js-slider-bullet__line"></span>
+    </div>
+    <div class="slider-bullet js-slider-bullet">
+      <span class="slider-bullet__text js-slider-bullet__text">04. TRUSTED BY THE BEST</span>
+      <span class="slider-bullet__line js-slider-bullet__line"></span>
+    </div>
+  </nav>
+  
+  <div class="scroll js-scroll">Scroll</div>
+  
+</div>
+
+<div class="vert-text">
+  <span>
+    Custom Ultimate<br>
+    Ears
+  </span>
+</div>
+
+<script id="vertexShader" type="x-shader/x-vertex">
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+</script>
+
+<script id="fragmentShader" type="x-shader/x-fragment">
+  varying vec2 vUv;
+
+  uniform sampler2D texture1;
+  uniform sampler2D texture2;
+  uniform sampler2D disp;
+
+  uniform float dispPower;
+  uniform float intensity;
+  
+  void main() {
+    vec2 uv = vUv;
+    
+    vec4 disp = texture2D(disp, uv);
+    vec2 dispVec = vec2(disp.x, disp.y);
+    
+    vec2 distPos1 = uv + (dispVec * intensity * dispPower);
+    vec2 distPos2 = uv + (dispVec * -(intensity * (1.0 - dispPower)));
+    
+    vec4 _texture1 = texture2D(texture1, distPos1);
+    vec4 _texture2 = texture2D(texture2, distPos2);
+    
+    gl_FragColor = mix(_texture1, _texture2, dispPower);
+  }
+</script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/97/three.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js'></script>
+  <script  src="js/index.js"></script>
+</body>
+
+</html>
