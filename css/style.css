@@ -149,7 +149,7 @@ ul, li {
 }
 .slider__text {
   position: absolute;
-     bottom: calc(2rem + 25vw);
+     bottom: calc(2rem + 15vw);
      left: calc(2rem + 15vw);
   z-index: 10;
   font-size: calc(1rem + 2vw);
